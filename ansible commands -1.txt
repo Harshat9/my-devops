@@ -1,0 +1,112 @@
+   26  ansible --version
+   27  cd /etc/ansible/
+   28  ls -l
+   29  vi hosts 
+   30  ls -l
+   31  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+   32  la -l
+   33  cd /etc/ansible
+   34  ls -l
+   35  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+   36  ls -l
+   37  vi ansible.cfg 
+   38  vi ansible.cfg
+   39  ansible-config init --disabled > ansible.cfg
+   40  vi ansible.cfg
+   41  ansible-config init --enable > ansible.cfg
+   42  ansible --version
+   43  cd
+   44  sudo remove ansible
+   45  sudo apt remove ansible
+   46  sudo apt purge ansible
+   47  sudo apt update
+   48  sudo apt upgrade
+   49  clear
+   50  lsb_release
+   51  cat /etc/os-release
+   52  clear
+   53  sudo apt-get update
+   54  sudo apt-get install software-properties-common
+   55  sudo apt-add-repository --yes --update ppa:ansible/ansible
+   56  sudo apt-get install ansible
+   57  clear
+   58  ansible --version
+   59  cd /etc/ansible
+   60  ls -l
+   61  vi ansible.cfg 
+   62  vi hosts 
+   63  vi ansible.cfg 
+   64  clear
+   65  ls -l
+   66  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+   67  cat host
+   68  cat hosts
+   69  ansible --inventory /etc/ansible/hosts all -m copy -a "src=/etc/ansible/ansible.cfg dest=/tmp" -u devops --ask-pass
+   70  clear
+   71  ansible --inventory /etc/ansible/hosts all -m shell -a "df -h /" -u devops --ask-pass
+   72  ansible --inventory /etc/ansible/hosts all -m shell -a "free -m" -u devops --ask-pass
+   73  ansible --inventory /etc/ansible/hosts all -m shell -a "ls -l /tmp" -u devops --ask-pass
+   74  history
+   75  clear
+   76  ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now.txt state=touch" -u devops --ask-pass
+   77  ansible --inventory /etc/ansible/hosts all -m shell -a "ls -l /tmp" -u devops --ask-pass
+   78  ansible-doc copy
+   79  clear
+   80  an::xit
+   81  clear
+   82  exit
+   83  clear
+   84  cd /etc/ansible/
+   85  clear
+   86  ls -l
+   87  cp hosts myinv
+   88  ls -l
+   89  ansible --inventory /etc/ansible/myinv all -m shell -a "ls -l /tmp" -u devops --ask-pass
+   90  clear
+   91  clear
+   92  cd /etc/ansible/
+   93  clear
+   94  vi myinv 
+   95  ansible --inventory /etc/ansible/myinv dev -m ping -u devops --ask-pass
+   96  ansible --inventory /etc/ansible/myinv qa -m ping -u devops --ask-pass
+   97  ansible --inventory /etc/ansible/myinv prod -m ping -u devops --ask-pass
+   98  ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass
+   99  ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass --limit 172.31.25.26
+  100  history
+  101  clear
+  102  cd /etc/ansible/
+  103  ls -l
+  104  vi myinv 
+  105  ansible --inventory /etc/ansible/myinv all -m ping
+  106  ansible localhost -m ping
+  107  cd /etc/ansible/
+  108  clear
+  109  ls -l
+  110  cat myinv 
+  111  clear
+  112  cat myinv
+  113  cd etc/ansible
+  114  cd /etc/ansible
+  115  cat myinv 
+  116  vi test.yml
+  117  ls -l
+  118  ansible-playbook --inventory /etc/ansible test.yml 
+  119  clear
+  120  ansible-playbook -i /root/myinv tomcat.yml 
+  121  cmatrix
+  122  vi vars.yml
+  123  ansible-playbook -i /root/myinv vars.yml 
+  124  ansible-playbook -i /root/myinv vars.yml --extra-vars "abc=56"
+  125  vi vars.yml 
+  126  vi vim.yml
+  127  ansible-playbook -i /root/myinv vim.yml 
+
+  140  vi vim.yml 
+  141  ansible-playbook -i /root/myinv vim.yml --extra-vars "action=absent"
+  142  ansible-playbook -i /root/myinv vim.yml --extra-vars "action=present"
+
+  144  vi tomcat.yml
+
+  150  ansible-playbook -i /root/myinv tomcat.yml 
+
+

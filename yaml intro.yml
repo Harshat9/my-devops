@@ -1,0 +1,52 @@
+yaml /yml -- yaml ain't markup language -- data serialization lang
+there is one basic relu that we follow when write yaml files -- INDENTATION -- spaces
+
+yaml space sensitive / yaml is also case sesitive
+all the data in the yaml, we write it as key value pairs
+key: value
+yaml is the most friendly language
+=========================================================================================
+scalars
+abc.yml
+name: harsha
+a: 9
+b: 5.0
+c : true
+
+map / dictionary (describing the properties of an object)
+abc.yml
+laptop:
+    ram: 16gb
+    cpu: 8core
+    disk: 512gb
+    disktype: SSD
+    model: ASUS
+
+list / array
+abc.yml
+- bmw
+- audi
+- tesla
+- skoda
+=========================================================================================
+cars:
+    - bmw:
+        color: red
+        model: sadan
+        engine: 2l
+    - audi:
+        color:
+            - red
+            - blue
+            - white
+        model:
+            - a4
+            - a3
+            - a6
+            - r8
+        engine:
+            - 2l
+            - 3l
+            - 5l
+    - tesla
+    - skoda

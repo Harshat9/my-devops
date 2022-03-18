@@ -1,0 +1,52 @@
+#root@controller:/etc/ansible# ANSIBLE commands used in terminal
+
+    1.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+    2.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+    3.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+    4.  ansible --inventory /etc/ansible/hosts all -m copy -a "src=/etc/ansible/ansible.cfg dest=/tmp" -u devops --ask-pass
+    5.  ansible --inventory /etc/ansible/hosts all -m shell -a "df -h /" -u devops --ask-pass
+    6.  ansible --inventory /etc/ansible/hosts all -m shell -a "free -m" -u devops --ask-pass
+    7.  ansible --inventory /etc/ansible/hosts all -m shell -a "ls -l /tmp" -u devops --ask-pass
+    8.  ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now.txt state=touch" -u devops --ask-pass
+    9.  ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now state=directory" -u devops --ask-pass
+    10. ansible-doc copy
+    11. ansible-doc -l
+    12. ansible-doc -l | grep win
+    13. cp hosts myinv
+    14. ansible --inventory /etc/ansible/myinv all -m shell -a "ls -l /tmp" -u devops --ask-pass
+    15. ansible --inventory /etc/ansible/myinv dev -m ping -u devops --ask-pass
+    16. ansible --inventory /etc/ansible/myinv dev -m ping -u devops --ask-pass
+    17. ansible --inventory /etc/ansible/myinv qa -m ping -u devops --ask-pass
+    18. ansible --inventory /etc/ansible/myinv prod -m ping -u devops --ask-pass
+    19. ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass
+    20. ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass --limit 172.31.25.26
+    21. ansible --inventory /etc/ansible/myinv all -m ping
+    22. ansible localhost -m ping
+    23. 
+    24. 
+    25. 
+    26. 
+    27. 
+    28. 
+    29. 
+    30. 
+    31. 
+    32. 
+    33. 
+    34. 
+    35. 
+    36. 
+    37. 
+    38. 
+    39. 
+    40. 
+    41. 
+    42. 
+    43. 
+    44. 
+    45. 
+    46. 
+    47. 
+    48. 
+    49. 
+    50. 
