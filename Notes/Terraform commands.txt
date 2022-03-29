@@ -1,0 +1,53 @@
+Install Terraform CLI on Ubuntu/Debian Linux OS
+
+  sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  sudo apt-get update && sudo apt-get install terraform
+
+Verify  :  terraform version
+
+block types : provider / resource / provisioner
+
+provider ::
+                  provider "aws" {
+                      access_key = "accesskey_here"
+                      secret_key = "SECRET_KEY_HERE"
+                      region     = "us-east-2"
+                  }
+
+resource ::
+                  resource "aws_instance" "myinstance" {
+
+                      ami = "${var.myami}" / "ami-04505e74c0741db8d"
+                      instance_type = "t2.micro"
+                      key_name = "edufeb28"
+                  }
+
+provisioner ::
+                  provisioner "file" {
+                      source = "./hello.txt"
+                      destination = "/tmp/hello.txt"
+                  }
+
+COMMANDS :
+
+terraform init
+    ==> initiates terraform in the pwd
+
+terraform apply
+    ==> Applies / Runs the terraform *.tf file created, Used to create instances / buckets or anyother resouces
+
+terraform destroy
+    ==> terminates everything created by using *.tf file
+
+terraform state list
+    ==> To know what are the resouces created by terraform *.tf file
+
+terraform state show <resource name>
+    ==> Shows only the details of particular resouce created by terraform
+
+terraform destroy -target <resource name>
+    ==> Terminates only the particular resouce
+
+
+

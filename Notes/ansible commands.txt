@@ -1,52 +1,231 @@
-#root@controller:/etc/ansible# ANSIBLE commands used in terminal
+ANSIBLE Manual Installation Steps (Installation Steps for Ubuntu)
 
-    1.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
-    2.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
-    3.  ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
-    4.  ansible --inventory /etc/ansible/hosts all -m copy -a "src=/etc/ansible/ansible.cfg dest=/tmp" -u devops --ask-pass
-    5.  ansible --inventory /etc/ansible/hosts all -m shell -a "df -h /" -u devops --ask-pass
-    6.  ansible --inventory /etc/ansible/hosts all -m shell -a "free -m" -u devops --ask-pass
-    7.  ansible --inventory /etc/ansible/hosts all -m shell -a "ls -l /tmp" -u devops --ask-pass
-    8.  ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now.txt state=touch" -u devops --ask-pass
-    9.  ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now state=directory" -u devops --ask-pass
-    10. ansible-doc copy
-    11. ansible-doc -l
-    12. ansible-doc -l | grep win
-    13. cp hosts myinv
-    14. ansible --inventory /etc/ansible/myinv all -m shell -a "ls -l /tmp" -u devops --ask-pass
-    15. ansible --inventory /etc/ansible/myinv dev -m ping -u devops --ask-pass
-    16. ansible --inventory /etc/ansible/myinv dev -m ping -u devops --ask-pass
-    17. ansible --inventory /etc/ansible/myinv qa -m ping -u devops --ask-pass
-    18. ansible --inventory /etc/ansible/myinv prod -m ping -u devops --ask-pass
-    19. ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass
-    20. ansible --inventory /etc/ansible/myinv qa,prod -m ping -u devops --ask-pass --limit 172.31.25.26
-    21. ansible --inventory /etc/ansible/myinv all -m ping
-    22. ansible localhost -m ping
-    23. 
-    24. 
-    25. 
-    26. 
-    27. 
-    28. 
-    29. 
-    30. 
-    31. 
-    32. 
-    33. 
-    34. 
-    35. 
-    36. 
-    37. 
-    38. 
-    39. 
-    40. 
-    41. 
-    42. 
-    43. 
-    44. 
-    45. 
-    46. 
-    47. 
-    48. 
-    49. 
-    50. 
+      sudo apt-get update
+      sudo apt-get install software-properties-common
+      sudo apt-add-repository --yes --update ppa:ansible/ansible
+      sudo apt-get install ansible
+
+Version : ansible --version
+Directory : /etc/ansible/
+
+######################################################################################################################
+
+## Create hosts file :
+
+vi hosts
+          3.89.114.185
+          52.90.233.176
+
+vi myinv
+
+          [dev]
+          3.89.114.185 ansible_user=devops ansible_ssh_pass=today@1234
+          52.90.233.176 ansible_user=devops ansible_ssh_pass=today@1234
+
+          [qa]
+          172.31.19.95 ansible_user=devops ansible_ssh_pass=today@1234
+          172.31.25.26 ansible_user=devops ansible_ssh_pass=today@1234
+
+          [prod]
+          ip-172-31-19-95.ec2.internal ansible_user=devops ansible_ssh_pass=today@1234
+          ip-172-31-25-26.ec2.internal ansible_user=devops ansible_ssh_pass=today@1234
+
+######################################################################################################################
+
+Ansible Commands :
+
+ansible-config init --enable > ansible.cfg
+    ==> enables the configuration file
+
+ansible-config init --disabled > ansible.cfg
+    ==> disables the configuration file
+
+ansible -i myinv 172.31.25.26 -m setup
+    ==> initiate the setup in specific server
+
+ansible --inventory /root/myinv qa,prod -m ping
+    ==> test / establish the connection
+
+ansible --inventory /etc/ansible/hosts all -m ping -u devops --ask-pass
+    ==> test / establish the connection with user mentioned
+
+ansible --inventory /root/myinv qa,prod -m ping -u devops --ask-pass --limit 172.31.88.20
+    ==> test / establish the connection for only limited users
+
+ansible --inventory /etc/ansible/hosts all -m copy -a "src=/etc/ansible/ansible.cfg dest=/tmp" -u devops --ask-pass
+    ==> copies data from src to dest (src=controller, dest=users)
+
+ansible --inventory /etc/ansible/hosts all -m shell -a "df -h /" -u devops --ask-pass
+ansible --inventory /etc/ansible/hosts all -m shell -a "free -m" -u devops --ask-pass
+ansible --inventory /etc/ansible/hosts all -m shell -a "ls -l /tmp" -u devops --ask-pass
+    ==> runs command in the users terminal and shows output in the controller
+
+ansible --inventory /etc/ansible/hosts all -m file -a "path=/tmp/now.txt state=touch" -u devops --ask-pass
+    ==> Creates the blank file in the user machines
+
+ansible localhost -m ping
+    ==> test / establish the connection for local_host only
+
+ansible-playbook --inventory /root/myinv test.yml
+    ==> executes the playbook (test.yml)
+
+ansible-playbook -i /root/myinv tomcat.yml
+    ==> executes the playbook (tomcat.yml) (installs tomcat in users machine)
+
+ansible-playbook -i /root/myinv tomcat.yml -vvv
+    ==> executes the playbook (tomcat.yml) in verbose mode
+
+ansible-playbook -i /root/myinv vars.yml
+    ==> executes the playbook (vars.yml) (prints the variable & assigned values)
+
+ansible-playbook -i /root/myinv vars.yml --extra-vars "abc=56"
+    ==> executes the playbook with defined variable value (vars.yml) (prints the variable & assigned values) 
+
+ansible-playbook -i /root/myinv vim.yml --extra-vars "action=absent"
+    ==> executes the playbook (vars.yml) (un-installs the vim package in user machines)
+
+ansible-playbook -i /root/myinv vim.yml --extra-vars "action=present"
+    ==> executes the playbook (vars.yml) (installs the vim package in user machines)
+
+######################################################################################################################
+
+root@controller:~# cat test.yml
+- name: play1
+  hosts: qa   # group name is from inventory
+  tasks:
+    - name: task1 - copy a file
+      copy:
+        src: /etc/hosts  ## source is always the controller machine
+        dest: /tmp   # dest is always on the target servers
+    - name: task2 - create a directroy
+      file:
+        path: /tmp/today
+        state: directory
+- name: play2
+  hosts: dev   # group name is from inventory
+  tasks:
+    - name: task1 - copy a file
+      copy:
+        src: /etc/resolv.conf  ## source is always the controller machine
+        dest: /tmp   # dest is always on the target servers
+    - name: task2 - create a directroy
+      file:
+        path: /tmp/tomorrow
+        state: directory
+
+######################################################################################################################
+
+root@controller:~# cat vars.yml
+- hosts: qa
+  vars:
+    name: hello
+    a: 45
+  tasks:
+    - debug:   ## this is same as echo linux
+        msg: "hello, hi there"
+    - debug:
+        var: a
+    - debug:
+        msg: "the value of a is: {{ a }}"
+    - debug:
+        msg: "the value of abc is: {{ abc }}"
+root@controller:~#
+
+######################################################################################################################
+
+root@controller:~# cat vim.yml
+- hosts: qa
+  become: yes
+  tasks:
+    - name: install / uninstall vi editor
+      apt:
+        name: vim
+        state: "{{ action }}"
+        update_cache: yes
+
+######################################################################################################################
+
+root@controller:~# cat tomcat.yml
+- hosts: dev
+  become: yes # ansible will perfrom sudo su once logged in as devops user
+  tasks:
+   - name: Install Java 1.8
+     apt:
+      name: openjdk-8-jdk
+      state: present
+      update_cache: yes
+
+   - name: add group "tomcat"
+     group:  ## groupadd tomcat
+       name: tomcat
+
+   - name: add user "tomcat"
+     user:  ## useradd tomcat -G tomcat
+      name: tomcat
+      group: tomcat
+      createhome: no
+
+   - name: Download Tomcat
+     get_url:  ### wget url -O /tmp/tomca.tgz
+       url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+       dest: /tmp/apache-tomcat-8.5.40.tar.gz
+
+   - name: Extract archive
+     unarchive:  ## tar -xzf tarfile ## by default source is always controller
+        src: /tmp/apache-tomcat-8.5.40.tar.gz
+        dest: /opt
+        remote_src: yes
+
+   - name: create symlink
+     file:   ## ln -s /opt/tomcat /opt/apache-tomcat-8.5.40
+       src: /opt/apache-tomcat-8.5.40
+       path: /opt/tomcat
+       state: link
+
+   - name: Change ownership of Tomcat installation
+     file: ## chmod 755 -R /opt/tomcat , chown tomcat:tomcat -R /opt/tomcat
+       path: /opt/tomcat
+       owner: tomcat
+       group: tomcat
+       mode: 0755
+       state: directory
+       recurse: yes
+
+   - name: create tomcat.service file
+     file: ## touch /etc/systemd/system/tomcat.service
+      path: /etc/systemd/system/tomcat.service
+      state: touch
+
+   - name: create tomcat service
+     blockinfile:
+       path: /etc/systemd/system/tomcat.service
+       block: |
+         [Unit]
+         Description=Tomcat - instance %i
+         After=syslog.target network.target
+         [Service]
+         Type=forking
+         User=tomcat
+         Group=tomcat
+         Environment="CATALINA_HOME=/opt/tomcat/"
+         ExecStart=/opt/tomcat/bin/startup.sh
+         ExecStop=/opt/tomcat/bin/shutdown.sh
+         [Install]
+         WantedBy=multi-user.target
+
+   - name: enable & start tomcat service
+     systemd: ## systemctl enable tomcat, systecctl start tomcat
+        name: tomcat
+        state: started
+        enabled: yes
+
+   - name: validate tomcat is running
+     shell: service tomcat status
+     register: tstatus
+
+   - debug:
+       var: tstatus.stdout_lines
+
+######################################################################################################################
+
+
