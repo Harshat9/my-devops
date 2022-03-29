@@ -1,0 +1,76 @@
+
+                                             //  TERMINAL tips  //                                                    
+
+
+######################################################################################################################
+#############################################//    COMMANDS   //######################################################
+######################################################################################################################
+
+ctrl+l
+    ==> clear screen (adds new layer screen in the bottom)
+
+reset  
+    ==> clears everything and brings up new shell (terminal)
+
+pushd <dir>
+    ==> changes the directory from one dir to another dir
+
+popd
+    ==> takes back to the dir from pushd command
+
+ctrl+z 
+    ==> minimize the running app to work in the same terminal window (don't close the terminal)
+
+fg 
+    ==> brigs back the minimized apps
+
+htop
+    ==> to show the processes
+
+sudo !!
+    ==> repeat the last command with sudo previllages
+
+ctrl+r 
+    ==> search the previously executed commands (use when you forgot syntax)
+
+!<history code>
+    ==> calls & executes the command from the history
+
+HISTTIMEFORMAT="%Y-%m-%d %T " 
+    ==> shows the specific time perios for the command
+
+nano ~/.bashrc
+    ==> to edit the history format permanently (config file)
+
+cmatrix
+    ==> shows the matrix flow (like screen-saver)
+
+ctrl+u
+    ==> delete everything on the commandline
+
+ctrl+a
+    ==> takes the cursor to the biginning of the cmd line
+
+ctrl+e
+    ==> takes the cursor to the end of the cmd line
+
+<cmd>; <cmd>  
+    ==> executes both the cmds
+
+<cmd> && <cmd>
+    ==> executes the cmds in sequence order (cmd1=true,execute,if false terminate the whole cmd)
+
+tail -f <file.name>
+    ==> executes the file with INSERT mode at the end
+
+truncate -s 0 <file.name> 
+    ==> clears all the content in the file (-s = sets the file size to 0)
+
+| column -t
+    ==> shows the content in the column view
+
+ps
+    ==> processes
+
+######################################################################################################################
+

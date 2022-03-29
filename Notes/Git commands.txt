@@ -1,0 +1,107 @@
+
+######################################################################################################################
+########################################//    GIT installation    //##################################################
+######################################################################################################################
+
+Install Git on - Ubuntu OS (Manual Installation Steps)
+
+          sudo su -
+          sudo apt-get install software-properties-common
+          sudo add-apt-repository ppa:git-core/ppa -y
+          sudo apt-get update
+          sudo apt-get install git -y
+          
+Version : git --version ( if it writes the version then the installation is successful )
+Directory : local / pwd
+
+######################################################################################################################
+########################################//    GIT Commands    //######################################################
+######################################################################################################################
+
+git init
+    ==> initiates git in the present working directory (pwd)
+
+git config [key]
+    ==> Add repository configuration
+
+git config --global user.name <name>
+    ==> configure user name to the github
+
+git config --global user.email <email>
+    ==> configure user email to the github
+
+git config --global --list
+    ==> shows the global configurations of the github
+
+git config --unset [key]
+    ==> Remove repository configuration
+
+git config --global --unset [key]
+    ==> Remove global configuration
+
+git config --system --unset [key]
+    ==> Remove system configurationr
+
+git branch
+    ==> shows the active branch
+
+git branch -m <branch_name>
+    ==> creates a new branch
+
+git branch -d <branch_name>
+    ==> deletes an existing branch
+
+git status
+    ==> checks the status in pwd
+
+git add <filename.java>
+git add .
+    ==> adds file / all the files from pwd to the git/git hub
+
+git commit -m <message>
+    ==> commits the changes to the git/github using commit id
+
+git commit -am "message"
+    ==> add & commit at the same time for existing files only
+
+git tag -a "v1.0" -m "v1.0" <commid ID>
+    ==> creates a TAG for commit
+
+git log
+    ==> shows all logs commited by the users
+
+git diff v1.0 v1.1
+    ==> shows the difference between two vesrions of the commits
+
+git remote add origin <url>
+    ==> links online and offline git repositeries
+
+git remote -v
+    ==> shows the remote url to push/fetch data
+
+git push -u <url> <branch>
+    ==> uploads data to github (-u is upper level)
+
+git push -u <url> <branch> --tags
+    ==> uploads data along with TAGS
+
+git clone <url>
+    ==> clone pwd from github to local
+
+git pull <url>
+    ==> downloads the data to local from server in github
+
+git revert <commit id>
+    ==> removes the previous commit and creates new commit with changes
+
+git log --oneline
+    ==> displays short commits with less details
+
+git reset --soft
+    ==> deletes all the above commits from the selected commit id
+
+git restore --staged <file.name>
+    ==> to untrack the files
+
+######################################################################################################################
+

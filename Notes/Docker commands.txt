@@ -1,0 +1,180 @@
+
+######################################################################################################################
+#########################################//    DOCKER installation    //##############################################
+######################################################################################################################
+
+Manual installation of docker on Ubuntu:
+
+    sudo su -
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    sudo apt-get update
+    sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+Verify            :   docker -v
+Directory         :   /var/lib/docker/
+Default library   :   docker.io/library/
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+## Test the installation by running a simple container:
+
+	docker run hello-world
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+## FYI Only ## Check Available Version for Install
+
+	apt-cache madison docker-ce | awk '{print $3}'
+
+######################################################################################################################
+#############################################//    COMMANDS   //######################################################
+######################################################################################################################
+
+                      #::#::#::#::#::#::#::#::#
+                      #:://  MANUAL mode  //::#
+                      #::#::#::#::#::#::#::#::#
+
+service docker status
+    ==> know the status of the docker service
+
+service docker restart
+    ==> restarts the docker service
+
+docker image ls
+    ==> shows the list of images present in your local directory
+
+docker ps
+    ==> shows the processes running by the docker (only running)
+
+docker ps -a
+    ==> shows all processes running by the docker (running & closed)
+
+docker pull <image_name / directory>:<version> / <tag>
+    ==> pulls image from default docker library / directory url
+
+docker run <image_name / directory>:<version> / <tag>
+    ==> runs the docker image in foreground (also called as attached mode)
+
+docker run -d <image_name / directory>:<version> / <tag>
+    ==> runs the docker image in background (also called as detached mode)
+
+docker run -d -P lerndevops/samples:petclinic
+    ==> runs the docker image in background with port allocated by the docker
+
+docker run -d -p <user-port>:<docker-port> <image_name / directory>:<version> / <tag>
+    ==> runs the docker image in background with port allocated by the user
+
+docker stats
+    ==> show the stats of running images (utilization)
+
+docker logs <docker_id>
+    ==> shows the logs of particular running docker image
+
+docker inspect <docker_id>
+    ==> shows the detailed information of particular running docker image
+
+docker start <docker_id>
+    ==> starts single / multiple running images (multiple docker_id's must be give by using space in-between)
+
+docker stop <docker_id>
+    ==> stops single / multiple running images (multiple docker_id's must be give by using space in-between)
+
+docker kill <docker_id>
+    ==> kills single / multiple running images (multiple docker_id's must be give by using space in-between)
+
+docker restart <docker_id>
+    ==> restarts single / multiple running images (multiple docker_id's must be give by using space in-between)
+
+docker rm <docker_id>
+    ==> soft remove single / multiple running images permanently (multiple docker_id's must be give by using space in-between)
+
+docker rm -f <docker_id>
+    ==> force remove single / multiple running images permanently (multiple docker_id's must be give by using space in-between)
+
+docker exec -it <docker_id> /bin/bash
+    ==> log into container (-it = interactive terminal)
+
+docker exec -it <docker_id> <shell-cmds>
+    ==> ececutes the shell commands inside the container image
+
+docker commit -m <"message"> <docker_id> image_name:tag
+    ==> commits the changes made by the user & creates new container image
+
+
+                      #::#::#::#::#::#::#::#::#::#
+                      #:://  AUTOMATIC mode  //::#
+                      #::#::#::#::#::#::#::#::#::#
+
+
+docker build --file <Dockerfile> --tag image_name:tag <pwd>
+    ==> automatically bilds docker / container images using scripts
+
+docker build --file <Dockerfile> --tag docker.io/<username>/image_name:tag <image dir>
+    ==> automatically bilds docker / container images using scripts & links image to docker.io
+
+docker tag image_name:tag <username>/image_name:tag
+    ==> changes the name of the images as per the docker.io
+
+docker login docker.io // docker login
+    ==> logs into docker using username & password of docker.io account
+
+docker push <username>/image_name:tag
+    ==> pushes the specific image into docker.io
+
+
+######################################################################################################################
+##########################################//    DOCKER SCRIPTS   //###################################################
+######################################################################################################################
+
+root@master:~# vi Dockerfile
+
+FROM tomcat:8.5.45
+
+RUN apt-get update && apt-get install -y vim
+RUN touch /tmp/abc.txt
+RUN cd /usr/local/tomcat/webapps && wget https://github.com/lerndevops/labs/raw/master/docker/images/code/sampleapp.war
+
+######################################################################################################################
+
+root@master:~# vi mytomcat
+
+FROM ubuntu:18.04
+
+RUN apt-get -y update
+RUN apt-get -y install openjdk-8-jdk wget
+
+RUN wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.55/bin/apache-tomcat-8.5.55.tar.gz -O /tmp/tomcat.tar.gz
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+RUN mv /tmp/apache-tomcat-8.5.55 /opt/tomcat
+
+COPY sampleapp.war /opt/tomcat/webapps/
+
+EXPOSE 8080
+CMD /opt/tomcat/bin/catalina.sh run
+
+
+######################################################################################################################
+#############################################//    APPENDIX   //######################################################
+######################################################################################################################
+
+curl <ip-address>:<port>
+    ==> used to check the port for response of docker image
+
+curl 172.17.0.7:3000 ; echo
+    ==> used to check the port for response of docker image & prints the output
+
+netstat -anp | grep <port>
+    ==> check whether the port is in listenig mode
+
+echo $SHELL
+    ==> prints the name os the sell using
+
+
+
+
+
+
