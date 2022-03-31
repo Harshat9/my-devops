@@ -70,7 +70,15 @@ truncate -s 0 <file.name>
     ==> shows the content in the column view
 
 ps
-    ==> processes
+    ==> shows all the running processes
+
+chmod +x <file-name>
+    ==> converts any file to executable file
+
+chown <file-name>
+    ==> changes the ownership of the file
+
+
 
 ######################################################################################################################
 
