@@ -78,7 +78,11 @@ chmod +x <file-name>
 chown <file-name>
     ==> changes the ownership of the file
 
+Ctrl+s
+    ==> freezes the terminal
 
+Ctrl+q
+    ==> unfreezes the terminal
 
 ######################################################################################################################
 
