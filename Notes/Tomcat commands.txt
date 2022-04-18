@@ -1,0 +1,33 @@
+
+######################################################################################################################
+#######################################//    TOMCAT installation    //################################################
+######################################################################################################################
+
+Manual installation Steps for Ubuntu
+
+          cd /tmp 
+          wget https://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz
+          tar xzf apache-tomcat-8.5.54.tar.gz  -C /opt/
+
+Start tomcat server 
+
+          cd /opt/apache-tomcat-8.5.54/bin
+          ./startup.sh
+
+NOTE : ensure that 8080 port is not occupied on your machine since tomcat by default uses 8080 port number. 
+
+User Login
+
+          http://<IP / User_name>:8080
+
+
+Version : tomcat --version ( if it writes the version then the installation is successful )
+Directory : local / user defined
+            /home/jagenthome/workspace/package/ (.war)
+            /opt/apache-tomcat-8.5.76/webapps/bin/ (./startup.sh)
+            /opt/apache-tomcat-8.5.76/webapps/conf/ (server.xml)
+
+
+######################################################################################################################
+
+

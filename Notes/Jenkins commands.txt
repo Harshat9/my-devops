@@ -1,0 +1,171 @@
+
+######################################################################################################################
+########################################//    JENKINS installation    //##############################################
+######################################################################################################################
+
+Install JENKINS on - Ubuntu OS (Manual Installation Steps)
+    
+    First : Install JAVA
+            
+            sudo add-apt-repository ppa:openjdk-r/ppa
+            sudo apt-get update
+            sudo apt-get install -y openjdk-8-jdk
+            
+    Second : Install MAVEN        
+            
+            cd /tmp
+            sudo wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+            sudo tar -xzf apache-maven-3.8.4-bin.tar.gz -C  /opt/
+            
+            sudo apt-get install maven
+
+    Third : Install JENKINS        
+            
+            sudo wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+            sudo echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
+            sudo apt-get update
+            sudo apt-get install jenkins
+
+
+    Fourth : Install PLUGINS required for CI Pipeline
+
+	     Manage Jenkins --> manage plugins -- Available -- search & install the below
+
+		        Warning NG -- install without restart
+		        cobertura -- install without restart
+		        Build Pipeline Plugin  -- install without restart
+
+Version   : jenkins --version ( if it writes the version then the installation is successful )
+Directory : local
+
+            ###########################################################################################
+            #                                                                                         #
+            #   Set JAVA_HOME & MAVEN_HOME as environment variables on Jenkins machine                #
+            #                                                                                         #
+            #            sudo echo "MAVEN_HOME=\"/opt/apache-maven-3.8.4\"" >> /etc/profile           #
+            #            sudo echo "JAVA_HOME=\"/usr/lib/jvm/java-8-openjdk-amd64\"" >> /etc/profile  #
+            #            sudo echo "PATH=\$JAVA_HOME/bin:\$MAVEN_HOME/bin:\$PATH" >> /etc/profile     #
+            #            source /etc/profile                                                          #
+            #                                                                                         #
+            ###########################################################################################
+
+
+######################################################################################################################
+########################################//    JENKINS Commands    //##################################################
+######################################################################################################################
+
+Jenkins ( CI )
+
+CI ( continuous Integration )
+
+Jenkins Job                 : maven goal                                              : post build action 
+
+      
+job1-codereview	            : -P metrics pmd:pmd                                      : **/pmd.xml ( publish pmd analysis results )       
+job2-unittest               : test                                                    : target/surefire-reports/*.xml            
+job3-codecoverage           : cobertura:cobertura -Dcobertura.report.format=xml       : target/site/cobertura/coverage.xml ( publish cobertura coverage report )              
+job4-package                : package                                                 : NA
+
+
+
+sudo systemctl status jenkins
+    ==> to check the status of the jenkin services
+
+sudo systemctl start jenkins
+    ==> to start the jenkin services
+
+sudo systemctl stop jenkins
+    ==> to stop the jenkin services
+
+sudo systemctl restart jenkins
+    ==> to restart the jenkin services
+
+
+######################################################################################################################
+##########################################//    JENKINS Code    //####################################################
+######################################################################################################################
+
+
+##################################
+#   Declarative Pipeline Syntax  #
+##################################
+
+pipeline {
+  agent any
+  stages {
+    stage('Build'){
+      steps {
+        echo 'message'
+      }
+    }
+    stage('Test'){
+      steps {
+        echo 'message'
+      }
+    }
+    stage('Deploy'){
+      steps {
+        echo 'message'
+      }
+    }
+  }
+}
+
+
+##################################
+#    Scripted Pipeline Syntax    #
+##################################
+
+node {
+  stage("Build"){
+    echo 'message'
+  }
+  stage("Test"){
+    echo 'message'
+  }
+  stage("Deploy"){
+    echo 'message'
+  }
+}
+
+
+##################################
+#        Pipeline as CODE        #
+##################################
+
+pipeline {
+    agent any
+    stages {
+        stage(stage1compile){
+            steps {
+                git 'https://github.com/harvar93/samplejavaapp'
+                sh '/opt/apache-maven-3.8.5/bin/mvn compile'            
+            }
+        }
+        stage(stage2codereview){
+            steps {
+                sh '/opt/apache-maven-3.8.5/bin/mvn -P metrics pmd:pmd'
+            }
+        }
+        stage(stage3unittest){
+            steps {
+                sh '/opt/apache-maven-3.8.5/bin/mvn test'            
+            }        
+        }
+        stage(stage4codecoverage){
+            steps {
+                sh '/opt/apache-maven-3.8.5/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'            
+            }
+        }
+        stage(stage5package){
+            steps {
+                sh '/opt/apache-maven-3.8.5/bin/mvn package'            
+            }
+        }
+    }
+}
+
+
+######################################################################################################################
+
+

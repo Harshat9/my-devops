@@ -51,6 +51,9 @@ git branch -m <branch_name>
 git branch -d <branch_name>
     ==> deletes an existing branch
 
+git checkout <branch_name>
+    ==> exits from the current working branch
+
 git status
     ==> checks the status in pwd
 
@@ -91,7 +94,7 @@ git clone <url>
 git pull <url>
     ==> downloads the data to local from server in github
 
-git revert <commit id>
+git revert <commit-id>
     ==> removes the previous commit and creates new commit with changes
 
 git log --oneline
@@ -102,6 +105,12 @@ git reset --soft
 
 git restore --staged <file.name>
     ==> to untrack the files
+
+git merge <file.name>
+    ==> merges the changes of the files
+    
+git cherry-pick <commit-id>
+    ==> copy the changes introduced in a single commit onto a branch as a new commit
 
 ######################################################################################################################
 

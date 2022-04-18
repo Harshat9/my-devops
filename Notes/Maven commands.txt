@@ -1,0 +1,101 @@
+
+######################################################################################################################
+#######################################//    MAVEN installation    //#################################################
+######################################################################################################################
+
+Install MAVEN on - Ubuntu OS (Manual Installation Steps)
+    
+    First : Install JAVA
+            
+            sudo add-apt-repository ppa:openjdk-r/ppa
+            sudo apt-get update
+            sudo apt-get install -y openjdk-8-jdk
+            
+    Second : Install MAVEN        
+            
+            cd /tmp
+            sudo wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+            sudo tar -xzf apache-maven-3.8.4-bin.tar.gz -C  /opt/
+            
+            sudo apt-get install maven
+
+Version : mvn --version / mvn -v ( if it writes the version then the installation is successful )
+Directory : local / pwd / user defined
+
+######################################################################################################################
+########################################//    MAVEN Commands    //####################################################
+######################################################################################################################
+
+mvn clean
+    ==> cleans the maven project by deleting the target directory
+
+mvn validate
+    ==> validates the maven project that everything is correct and all the necessary information is available.
+
+mvn compiler:compile
+mvn compile
+    ==> compiles the java source classes of the maven project
+
+mvn test
+    ==> This command is used to run the test cases of the project using the maven-surefire-plugin.
+
+mvn package
+    ==> builds the maven project and packages them into a JAR, WAR, etc
+
+mvn verify
+    ==> This command build the project, runs all the test cases and run any checks on the results of the integration
+        tests to ensure quality criteria are met.
+
+mvn install
+    ==> builds the maven project and installs the project files (JAR, WAR, pom.xml, etc) to the local repository
+
+mvn deploy
+    ==> deploy the artifact to the remote repository. The remote repository should be configured properly in theproject pom.xml file distributionManagement tag.
+        The server entries in the maven settings.xml file is used to provide authentication details.
+
+mvn compiler:testCompile
+mvn testCompile
+    ==> compiles the test classes of the maven project
+
+mvn dependency:tree
+    ==> generates the dependency tree of the maven project.
+
+mvn dependency:analyze
+    ==> analyzes the maven project to identify the unused declared and used undeclared dependencies.
+        It’s useful in reducing the build size by identifying the unused dependencies and then remove it from the pom.xml file.
+
+mvn archetype:generate
+    ==> Maven archetypes is a maven project templating toolkit.
+        We can use this command to generate a skeleton maven project of different types, such as JAR, web application, maven site, etc.
+
+mvn site:site
+    ==> generates a site for the project. You will notice a “site” directory in the target after executing this command.
+        There will be multiple HTML files inside the site directory that provides information related to the project.
+
+mvn -help
+    ==> This command prints the maven usage and all the available options for us to use.
+
+mvn -o package
+    ==> This command is used to run the maven build in the offline mode.
+        It’s useful when we have all the required JARs download in the local repository and we don’t want Maven to look for any JARs in the remote repository.
+
+mvn -q package
+    ==> Runs the maven build in the quiet mode, only the test cases results and errors are displayed.
+
+mvn -X package
+    ==> Prints the maven version and runs the build in the debug mode. It’s opposite of the quiet mode and you will see a lot of debug messages in the console.
+
+mvn -V package
+    ==> This command prints the maven version and then continue with the build. It’s equivalent to the commands mvn -v;mvn package.
+
+mvn -DskipTests package
+    ==> The skipTests system property is used to skip the unit test cases from the build cycle. We can also use -Dmaven.test.skip=true to skip the test cases execution.
+
+mvn -T 4 package
+    ==> This command tells maven to run parallel builds using the specified thread count. It’s useful in multiple module projects where modules can be built in parallel.
+        It can reduce the build time of the project.
+
+
+######################################################################################################################
+
+
