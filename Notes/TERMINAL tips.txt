@@ -84,5 +84,12 @@ Ctrl+s
 Ctrl+q
     ==> unfreezes the terminal
 
-######################################################################################################################
+sudo update-alternatives --config <app-name>
+    ==> check and switch any versions of the app
+
+dpkg -l | grep <package-name>
+    ==> to check the installation method of app
+
+sudo apt purge <package-name>
+    ==> used to completely erase the package from the OS
 
