@@ -93,3 +93,30 @@ dpkg -l | grep <package-name>
 sudo apt purge <package-name>
     ==> used to completely erase the package from the OS
 
+
+######################################################################################################################
+
+Amazon EC2 ssh timeout due inactivity
+
+
+1. Remote into your EC2 instance.
+
+    ssh -i <YOUR_PRIVATE_KEY_FILE>.pem <INTERNET_ADDRESS_OF_YOUR_INSTANCE>
+
+2. Add a "client-alive" directive to the instance's SSH-server configuration file.
+
+    echo 'ClientAliveInterval 60' | sudo tee --append /etc/ssh/sshd_config
+
+3. Restart or reload the SSH server, for it to recognize the configuration change.
+
+   (i) The command for that on Ubuntu Linux would be..
+
+          sudo service ssh restart
+
+  (ii) On any other Linux, though, the following is probably correct..
+
+          sudo service sshd restart
+
+4. Disconnect.
+
+    logout
