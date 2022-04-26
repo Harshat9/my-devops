@@ -73,6 +73,9 @@ git tag -a "v1.0" -m "v1.0" <commid ID>
 git log
     ==> shows all logs commited by the users
 
+git log -p <file-name>
+    ==> Shows all the changes in all the commits linked to that particular file (how many time modified)
+
 git diff v1.0 v1.1
     ==> shows the difference between two vesrions of the commits
 
@@ -106,8 +109,8 @@ git reset --soft
 git restore --staged <file.name>
     ==> to untrack the files
 
-git merge <file.name>
-    ==> merges the changes of the files
+git merge <file.name / branch-name>
+    ==> merges the changes of the files / merges the changes of the files among the banches
     
 git cherry-pick <commit-id>
     ==> copy the changes introduced in a single commit onto a branch as a new commit
