@@ -1,0 +1,52 @@
+Ethical Hacking :
+
+    1) Learn C & Pyhton
+    2) Learn Linux & Bash
+    3) Learn Scripting & database
+    4) Learn Cryptography
+    5) Read Hacking Books
+    6) Do experiments a lot
+    
+DevOps Engineer :
+    1) C Development :
+	    VS code, eclipse
+	    SCM(source code management) - GIT
+
+    2) C Integration :
+	    Jenkins, Maven, Sonarqube
+
+    3) C Deployment :
+	    Urbancode, AWS code deploy, Ansible, docker, AWS, Kubernetes
+	    
+    4) C Testing :
+	    Selenium
+
+    5) C Monitoring :
+	    ZABBIX prometheus
+
+    IMP tools:
+	    
+	    GIT
+	    MAVEN
+	    JENKINS
+	    ANSIBLE
+	    DOCKER
+	    KUBERNETES
+	    AWS
+
+Python Developer :
+
+     1) Basics of python
+     	looping, file-handling, error-handling, functions
+     2) Advanced
+     	Lamda, filter, map, iter-tools
+     3) Oops concepts
+     	class, object, inheritance, pormopism, encapsulation
+     	
+     WEB framework
+     	Django, flask (backend)
+     html, css (frontend)
+     SQL lite
+     Rest api
+     
+     Practice senarios

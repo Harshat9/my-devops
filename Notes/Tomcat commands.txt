@@ -30,4 +30,19 @@ Directory : local / user defined
 
 ######################################################################################################################
 
+sudo nano /opt/tomcat/conf/tomcat-users.xml
+
+    <role rolename="manager-gui"/>
+    <user username="manager" password="anyPassword" roles="manager-gui"/>
+
+    <role rolename="admin-gui"/>
+    <user username="admin" password="anyPassword" roles="admin-gui, manager-gui"/>
+
+sudo nano /opt/tomcat/conf/server.xml
+
+    change the port number to 8081 (by default it is 8080)
+
+######################################################################################################################
+
+
 
