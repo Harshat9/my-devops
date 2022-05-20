@@ -6,13 +6,16 @@ using namespace std;
 int main()
 {
         clrscr();
-        int a,b,mul;
+        int a,b;
         printf("Enter 'a' value = ");
         scanf("%d",&a);
         printf("Enter 'b' value = ");
         scanf("%d",&b);
-        mul=a*b;
-        printf("(a*b) = %d\n",mul);
+        a=a+b;
+	b=a-b;
+	a=a-b;
+        printf("swapped value of a = %d\n",a);
+	printf("swapped value of b = %d\n",b);
         getch();
         return 0;
-}
+} 
