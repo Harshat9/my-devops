@@ -44,6 +44,9 @@ service docker status
 service docker restart
     ==> restarts the docker service
 
+systemctl enable docker
+    ==> Enables to start the docker automatically whenever the system restarted  
+
 docker image ls
     ==> shows the list of images present in your local directory
 
